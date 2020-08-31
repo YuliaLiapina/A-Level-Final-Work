@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
+﻿using System.Data.Entity;
+using DataAccessLayer.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DataAccessLayer
 {
@@ -7,7 +9,11 @@ namespace DataAccessLayer
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
+            Database.SetInitializer<ApplicationDbContext>(new ContextInitializer());
         }
+
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public static ApplicationDbContext Create()
         {
