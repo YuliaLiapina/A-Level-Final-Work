@@ -1,32 +1,11 @@
-﻿using System.Collections.Generic;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
-using System.Data.Entity;
-using System.Linq;
+﻿using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repositories
 {
-    public class PostRepo : IPostRepo
+    public class PostRepo : RepositoryBase<Post, int>
     {
-        private readonly ApplicationDbContext _context;
-
-        public PostRepo()
+        public PostRepo(ApplicationDbContext context) : base(context)
         {
-            _context = new ApplicationDbContext();
-        }
-
-        public IList<Post> GetAll()
-        {
-            return _context.Posts
-                .Include(post => post.Comments)
-                .ToList();
-        }
-
-        public Post GetById(int id)
-        {
-            return _context.Posts
-                .Include(post => post.Comments)
-                .First(post => post.Id == id);
         }
     }
 }

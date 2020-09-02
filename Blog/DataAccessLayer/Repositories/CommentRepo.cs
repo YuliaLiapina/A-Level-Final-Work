@@ -1,25 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Data.Entity;
-using DataAccessLayer.Interfaces;
-using DataAccessLayer.Models;
+﻿using DataAccessLayer.Models;
 
 namespace DataAccessLayer.Repositories
 {
-    public class CommentRepo : ICommentRepo
+    public class CommentRepo : RepositoryBase<Post, int>
     {
-        private readonly ApplicationDbContext _context;
-
-        public CommentRepo()
+        public CommentRepo(ApplicationDbContext context) : base(context)
         {
-            _context = new ApplicationDbContext();
-        }
-
-        public IList<Comment> GetAll()
-        {
-            return _context.Comments
-                .Include(comment => comment.Post)
-                .ToList();
         }
     }
 }

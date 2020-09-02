@@ -1,9 +1,9 @@
 ﻿using System;
-using DataAccessLayer.Interfaces;
+using DataAccessLayer;
 
-namespace DataAccessLayer.Models
+namespace Blog.Models
 {
-    public class Comment : IEntity<int>
+    public class CommentViewModel
     {
         public int Id { get; set; }
         public DateTime PublishDate { get; set; }
@@ -13,6 +13,6 @@ namespace DataAccessLayer.Models
         public int AuthorId { get; set; }
         public ApplicationUser Author { get; set; }
         public int PostId { get; set; }
-        public Post Post { get; set; }
+        public PostViewModel Post { get; set; }
     }
 }

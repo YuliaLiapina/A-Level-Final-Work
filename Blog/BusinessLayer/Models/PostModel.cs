@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using DataAccessLayer.Interfaces;
+using DataAccessLayer;
 
-namespace DataAccessLayer.Models
+namespace BusinessLayer.Models
 {
-    public class Post : IEntity<int>
+    public class PostModel
     {
-        public Post()
+        public PostModel()
         {
-            Comments = new List<Comment>();
+            Comments = new List<CommentModel>();
         }
         public int Id { get; set; }
         public DateTime PublishDate { get; set; }
@@ -19,6 +19,6 @@ namespace DataAccessLayer.Models
 
         public int AuthorId { get; set; }
         public ApplicationUser Author { get; set; }
-        public ICollection<Comment> Comments { get; set; }
+        public ICollection<CommentModel> Comments { get; set; }
     }
 }

@@ -1,15 +1,16 @@
 ﻿using System.Data.Entity;
+using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace DataAccessLayer
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>, IIdentityServerContext
     {
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
-            Database.SetInitializer<ApplicationDbContext>(new ContextInitializer());
+            Database.SetInitializer(new ContextInitializer());
         }
 
         public DbSet<Post> Posts { get; set; }
