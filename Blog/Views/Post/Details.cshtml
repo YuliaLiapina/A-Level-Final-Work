@@ -1,0 +1,34 @@
+﻿@model Blog.Models.PostViewModel
+
+@{
+    ViewBag.Title = "Article Details - " + @Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="post">
+    <img src="@Model.Image" alt="#">
+    <h2>@Model.Title</h2>
+    <span class="author">@Model.Author.UserName (Publish date: <em>@Model.PublishDate.ToShortDateString()</em>)</span>
+    <div class="content">
+        @Html.Raw(Model.Body)
+    </div>
+</div>
+<ul class="comments">
+    @foreach (var comment in Model.Comments)
+    {
+        <li>
+            <strong>@comment.Author.FullName</strong> <em>@comment.PublishDate.ToShortDateString()</em>
+            <p>@comment.Body</p>
+        </li>
+    }
+</ul>
+<h5>Add comment</h5>
+@using (Html.BeginForm("AddComment", "Comment", FormMethod.Post))
+{
+    @Html.Hidden("PostId", Model.Id, null)
+    <div class="form-group">
+        <label>Comment</label>
+        @Html.TextArea("Body", "", 5, 50, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+}

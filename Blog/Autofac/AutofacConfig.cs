@@ -20,6 +20,7 @@ namespace Blog.Autofac
 
             builder.RegisterType<ApplicationDbContext>().InstancePerRequest();
             builder.RegisterType<PostManager>().As<IPostManager>();
+            builder.RegisterType<CommentManager>().As<ICommentManager>();
             builder.RegisterType<PostRepo>().As<IRepository<Post, int>>();
             builder.RegisterType<CommentRepo>().As<IRepository<Comment, int>>();
 

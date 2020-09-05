@@ -65,6 +65,11 @@ namespace Blog.Models
     public class RegisterViewModel
     {
         [Required]
+        [StringLength(30, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 2)]
+        [Display(Name = "Full Name")]
+        public string FullName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }

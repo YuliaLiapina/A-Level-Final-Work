@@ -72,6 +72,18 @@
     <Compile Include="Migrations\202008311408229_Add_IsUserBlocked_to_UsersTable.Designer.cs">
       <DependentUpon>202008311408229_Add_IsUserBlocked_to_UsersTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009021657541_Add_Description_And_Image_To_Post.cs" />
+    <Compile Include="Migrations\202009021657541_Add_Description_And_Image_To_Post.Designer.cs">
+      <DependentUpon>202009021657541_Add_Description_And_Image_To_Post.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009021659324_Change_authorId_type_to_string.cs" />
+    <Compile Include="Migrations\202009021659324_Change_authorId_type_to_string.Designer.cs">
+      <DependentUpon>202009021659324_Change_authorId_type_to_string.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202009041533575_Add_FullName_To_User.cs" />
+    <Compile Include="Migrations\202009041533575_Add_FullName_To_User.Designer.cs">
+      <DependentUpon>202009041533575_Add_FullName_To_User.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
     <Compile Include="Models\Comment.cs" />
@@ -94,6 +106,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202008311408229_Add_IsUserBlocked_to_UsersTable.resx">
       <DependentUpon>202008311408229_Add_IsUserBlocked_to_UsersTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009021657541_Add_Description_And_Image_To_Post.resx">
+      <DependentUpon>202009021657541_Add_Description_And_Image_To_Post.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009021659324_Change_authorId_type_to_string.resx">
+      <DependentUpon>202009021659324_Change_authorId_type_to_string.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009041533575_Add_FullName_To_User.resx">
+      <DependentUpon>202009041533575_Add_FullName_To_User.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

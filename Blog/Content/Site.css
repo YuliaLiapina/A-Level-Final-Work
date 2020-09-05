@@ -22,3 +22,65 @@ select,
 textarea {
     max-width: 280px;
 }
+.jumbotron{
+    background: url(/Content/images/dims.jpeg) no-repeat 50% 50%;
+    background-size: cover;
+    margin: 35px 0;
+    color: #fff;
+    min-height: 370px;
+}
+.jumbotron h1,
+.jumbotron p{
+    text-shadow: 1px 1px 1px #666;
+}
+.jumbotron h1{
+    margin: 42px 0 52px;
+}
+h2 {
+    margin: 35px 0;
+}
+.card {
+    color: #333;
+}
+.card:hover {
+    text-decoration: none;
+    color: #333;
+}
+.card .thumbnail{
+    transition: box-shadow 0.3s ease-in-out;
+}
+.card:hover .thumbnail{
+    box-shadow: 0 0 6px #666;
+}
+.card img{
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    margin: 0 0 20px;
+}
+.card h3{
+    margin: 0 0 25px;
+    font-size: 20px;
+    line-height: 28px;
+}
+.thumbnail .caption{
+    padding: 18px 18px 10px;
+}
+.post{
+    padding: 50px 0 30px;
+}
+.post h2{
+    margin: 0 0 30px;
+    max-width: 80%;
+    line-height: 40px;
+}
+.post img{
+    max-width: 500px;
+    float: right;
+    margin: 0 0 30px 50px;
+}
+.author {
+    display: block;
+    font-size: 13px;
+    margin: 0 0 20px;
+}

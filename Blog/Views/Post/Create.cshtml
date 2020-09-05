@@ -1,0 +1,33 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Create New Post";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create New Post</h2>
+
+@using (Html.BeginForm("AddPost", "Post", FormMethod.Post))
+{
+    <div class="form-group">
+        <label>Title</label>
+        @Html.TextBox("Title", "",new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label>Image URL</label>
+        @Html.TextBox("Image", "",new { @class = "form-control"})
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        @Html.TextArea("Discription", "", 5, 50, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        <label>Content</label>
+        @Html.TextArea("Body", "", 5, 50, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.CheckBox("IsShowComment", true, new {@class = "form-check-input", id = "check1"})
+        <label class="form-check-label" for="check1">Show comments</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+}

@@ -43,6 +43,8 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="CommentManager.cs" />
+        <Compile Include="Interfaces\ICommentManager.cs" />
         <Compile Include="Interfaces\IPostManager.cs" />
         <Compile Include="Models\CommentModel.cs" />
         <Compile Include="Models\PostModel.cs" />

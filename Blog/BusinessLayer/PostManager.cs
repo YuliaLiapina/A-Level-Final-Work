@@ -27,5 +27,18 @@ namespace BusinessLayer
 
             return entityModels;
         }
+
+        public PostModel GetById(int id)
+        {
+            var entity = _postRepo.Get(id);
+            var entityModel = _mapper.Map<PostModel>(entity);
+
+            return entityModel;
+        }
+
+        public void Add(PostModel post)
+        {
+            _postRepo.Add(_mapper.Map<Post>(post), true);
+        }
     }
 }

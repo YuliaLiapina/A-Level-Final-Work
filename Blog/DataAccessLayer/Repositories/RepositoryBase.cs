@@ -10,7 +10,7 @@ namespace DataAccessLayer.Repositories
     public abstract class RepositoryBase<TEntity, TKey> : IRepository<TEntity, TKey> where TEntity : class, IEntity<TKey>
     {
         private readonly ApplicationDbContext _ctx;
-        private DbSet<TEntity> _dbSet;
+        protected DbSet<TEntity> _dbSet;
 
         public RepositoryBase(ApplicationDbContext context)
         {
@@ -18,9 +18,9 @@ namespace DataAccessLayer.Repositories
             _dbSet = context.Set<TEntity>();
         }
 
-        public TEntity Get(TKey id)
+        public virtual TEntity Get(TKey id)
         {
-            return _dbSet.FirstOrDefault(x => x.Id.Equals(id));
+            return _dbSet.FirstOrDefault(x => x.Id.ToString().Equals(id.ToString()));
         }
 
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> expression)
@@ -28,7 +28,7 @@ namespace DataAccessLayer.Repositories
             return _dbSet.Where(expression).ToList();
         }
 
-        public IEnumerable<TEntity> Get()
+        public virtual IEnumerable<TEntity> Get()
         {
             return _dbSet.ToList();
         }
@@ -41,7 +41,7 @@ namespace DataAccessLayer.Repositories
             if (isSaveChangeRequired) _ctx.SaveChanges();
         }
 
-        public void Add(TEntity entity, bool isSaveChangeRequired = true)
+        public virtual void Add(TEntity entity, bool isSaveChangeRequired = true)
         {
             _dbSet.Add(entity);
             if (isSaveChangeRequired) _ctx.SaveChanges();
