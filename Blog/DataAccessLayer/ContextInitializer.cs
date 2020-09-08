@@ -23,7 +23,15 @@ namespace DataAccessLayer
             roleManager.Create(roleAuthor);
             roleManager.Create(roleUser);
 
-            var admin = new ApplicationUser { Email = "admin@gmail.com", UserName = "admin@gmail.com", FullName = "Administrator" };
+            var admin = new ApplicationUser
+            {
+                Email = "admin@gmail.com",
+                UserName = "admin@gmail.com",
+                FullName = "Administrator",
+                PostsReadCount = 0,
+                CommentsWriteCount = 0,
+                PostsWriteCount = 0
+            };
             string password = "admin@gmail.com1A";
             var result = userManager.Create(admin, password);
 
@@ -32,6 +40,41 @@ namespace DataAccessLayer
                 userManager.AddToRole(admin.Id, roleAdmin.Name);
                 userManager.AddToRole(admin.Id, roleAuthor.Name);
                 userManager.AddToRole(admin.Id, roleUser.Name);
+            }
+
+            var author = new ApplicationUser
+            {
+                Email = "author@gmail.com",
+                UserName = "author@gmail.com",
+                FullName = "Author",
+                PostsReadCount = 0,
+                CommentsWriteCount = 0,
+                PostsWriteCount = 0
+            };
+            string authorPassword = "author@gmail.com1A";
+            var authorResult = userManager.Create(author, authorPassword);
+
+            if(authorResult.Succeeded)
+            {
+                userManager.AddToRole(author.Id, roleAuthor.Name);
+                userManager.AddToRole(author.Id, roleUser.Name);
+            }
+
+            var user = new ApplicationUser
+            {
+                Email = "user@gmail.com",
+                UserName = "user@gmail.com",
+                FullName = "User",
+                PostsReadCount = 0,
+                CommentsWriteCount = 0,
+                PostsWriteCount = 0
+            };
+            string userPassword = "user@gmail.com1A";
+            var userResult = userManager.Create(user, userPassword);
+
+            if(userResult.Succeeded)
+            {
+                userManager.AddToRole(user.Id, roleUser.Name);
             }
 
             var comments = new List<Comment>
@@ -66,7 +109,8 @@ namespace DataAccessLayer
                            "<p>While the tool does not actually track autonomous vehicles on the road in real-time — at least not in its current implementation — it does provide background information regarding current driverless vehicle operations and the organizations conducting said programs. The screenshot below, for example, shows information regarding the autonomy project Toyota is currently running out of its R&D center in Ann Arbor, Mich.</p>",
                     IsBlocked = false,
                     IsShowComment = true,
-                    Author = admin
+                    Author = admin,
+                    UsersReadCount = 0
                 });
             }
 

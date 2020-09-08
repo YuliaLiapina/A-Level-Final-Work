@@ -20,7 +20,10 @@
 input,
 select,
 textarea {
-    max-width: 280px;
+    max-width: 100%;
+}
+textarea{
+    min-height: 120px;
 }
 .jumbotron{
     background: url(/Content/images/dims.jpeg) no-repeat 50% 50%;
@@ -47,10 +50,7 @@ h2 {
     color: #333;
 }
 .card .thumbnail{
-    transition: box-shadow 0.3s ease-in-out;
-}
-.card:hover .thumbnail{
-    box-shadow: 0 0 6px #666;
+    border: none;
 }
 .card img{
     width: auto;
@@ -64,10 +64,11 @@ h2 {
     line-height: 28px;
 }
 .thumbnail .caption{
-    padding: 18px 18px 10px;
+    padding: 0 0 20px;
 }
 .post{
     padding: 50px 0 30px;
+    overflow: hidden;
 }
 .post h2{
     margin: 0 0 30px;
@@ -83,4 +84,96 @@ h2 {
     display: block;
     font-size: 13px;
     margin: 0 0 20px;
+    color: #a8abae;
+}
+.align-right{
+    float: right;
+}
+.main{
+    width: 100%;
+    overflow: hidden;
+}
+.main > .row{
+    width: 80%;
+    float: left;
+}
+.main > .aside{
+    width: 20%;
+    float: right;
+}
+.main .row{
+    text-align: left;
+}
+.main .card{
+    text-align: left;
+    display: inline-block;
+    width: 32.5%;
+    vertical-align: top;
+    float: none;
+    padding-left: 15px;
+}
+.table img{
+    max-width: 150px;
+}
+.table .actions{
+    width: 140px;
+}
+.table .actions .btn{
+    margin: 0 5px 0 0;
+}
+.table .allowed,
+.table .not-allowed{
+    background: url(/Content/images/icon-allowed.svg) no-repeat 50% 50%;
+    background-size: cover;
+    width: 20px;
+    height: 20px;
+    display: block;
+    overflow: hidden;
+    text-indent: -9999px;
+}
+.table .not-allowed{
+    background: url(/Content/images/icon-denide.svg) no-repeat 50% 50%;
+    background-size: cover;
+}
+.comments-box{
+    width: 100%;
+    overflow: hidden;
+    padding: 40px 0;
+}
+.comments-box h3{
+    font-size: 24px;
+    line-height: 36px;
+    margin: 0 0 20px;
+}
+
+.comments-box h3 span{
+    color: #a8abae;
+    font-size: 14px;
+}
+.comments{
+    margin: 0;
+    padding: 30px 0 0;
+    list-style: none;
+}
+.comments li{
+    padding: 0 0 15px;
+    margin: 0 0 25px;
+    border-bottom: 1px solid #eee;
+}
+.comments li strong{
+    display: block;
+}
+.comments li em{
+    color: #a8abae;
+    display: block;
+    margin: 0 0 10px;
+}
+.blocked{
+    background: #fff url(/Content/images/blocked.png) no-repeat 50% 50%;
+    background-size: cover;
+    width: 63px;
+    height: 33px;
+    display: block;
+    overflow: hidden;
+    text-indent: -9999px;
 }

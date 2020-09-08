@@ -1,0 +1,113 @@
+﻿@model Blog.Models.AllPostsViewModel
+
+@{
+    ViewBag.Title = "My Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.IsUserBlocked)
+{
+    <br>
+    <div class="alert alert-danger" role="alert">
+        You cannot add/edit/delete an article because your account is blocked!
+    </div>
+}
+
+<h2>
+    My Articles
+
+    <span class="align-right">
+        @if (!Model.IsUserBlocked)
+        {
+            <a href="@Url.Action("Create")"
+               class="btn btn-success">
+                Create Article
+            </a>
+        }
+        @if (Model.Page > 0)
+        {
+            <a href="@Url.Action("MyPosts", new {page = Model.Page - 1})"
+               class="btn btn-default">
+                &laquo; Prev
+            </a>
+        }
+        @if (Model.Page < Model.MaxPage)
+        {
+            <a href="@Url.Action("MyPosts", new {page = Model.Page + 1})"
+               class="btn btn-default">
+                Next &raquo;
+            </a>
+        }
+    </span>
+</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Publish Date</th>
+        <th scope="col">Allowed to comment</th>
+        <th scope="col">Is blocked</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @if (Model.Posts.Count > 0)
+    {
+        foreach (var article in Model.Posts)
+        {
+            <tr>
+                <th scope="row">@article.Id</th>
+                <td>
+                    @Html.ActionLink(article.Title, "Details", "Post", routeValues: new {id = article.Id}, htmlAttributes: null)
+                </td>
+                <td>@article.PublishDate.ToShortDateString()</td>
+                <td>
+                    @if (article.IsShowComment)
+                    {
+                        <span class="allowed">allowed</span>
+                    }
+                    else
+                    {
+                        <span class="not-allowed">not-allowed</span>
+                    }
+                </td>
+                <td>
+                    @if (article.IsBlocked)
+                    {
+                        <span class="blocked">Blocked</span>
+                    }
+                </td>
+                <td>
+                    <img src="@article.Image" alt="#">
+                </td>
+                <td>
+                    <div class="actions">
+                        @if (!Model.IsUserBlocked)
+                        {
+                            @Html.ActionLink("Edit", "Edit", "Post", new {id = article.Id, ReturnUrl = Url.Action("MyPosts")}, new {@class = "btn btn-success"})
+                            @Html.ActionLink("Delete", "Delete", "Post", new {id = article.Id}, new {@class = "btn btn-danger"})
+                        }
+                    </div>
+                </td>
+            </tr>
+        }
+    }
+    else
+    {
+        <tr>
+            <td colspan="7">
+                <div class="alert alert-warning" role="alert">
+                    You haven't created any articles yet.
+                    @if (!Model.IsUserBlocked)
+                    {
+                        <span>Do you want to @Html.ActionLink("create", "Create", "Post")?</span>
+                    }
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

@@ -1,0 +1,46 @@
+﻿@model Blog.Models.EditPostViewModel
+
+@{
+    ViewBag.Title = "Edit Article";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Article</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { Type="hidden" }})
+    @Html.EditorFor(model => model.ReturnUrl, new { htmlAttributes = new { Type="hidden" }})
+    <div class="form-group">
+        @Html.LabelFor(model => model.Title)
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Image)
+        @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Image, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Discription)
+        @Html.EditorFor(model => model.Discription, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Discription, null, new { @class = "text-danger" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.Body)
+        @Html.EditorFor(model => model.Body, new {htmlAttributes = new {@class = "form-control"}})
+        @Html.ValidationMessageFor(model => model.Body, null, new {@class = "text-danger"})
+    </div>
+    <div class="form-group">
+        @Html.EditorFor(model => model.IsShowComment, new { htmlAttributes = new { @class = "form-check-input", id = "check1" }})
+        @Html.LabelFor(model => model.IsShowComment, new {@class = "form-check-input"})
+    </div>
+    if(User.IsInRole("admin"))
+    {
+        <div class="form-group">
+            @Html.EditorFor(model => model.IsBlocked, new { htmlAttributes = new { @class = "form-check-input" }})
+            @Html.LabelFor(model => model.IsBlocked, new {@class = "form-check-input"})
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Change</button>
+}

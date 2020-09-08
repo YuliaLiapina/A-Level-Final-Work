@@ -1,4 +1,4 @@
-﻿@model dynamic
+﻿@model Blog.Models.CreatePostViewModel
 
 @{
     ViewBag.Title = "Create New Post";
@@ -7,27 +7,31 @@
 
 <h2>Create New Post</h2>
 
-@using (Html.BeginForm("AddPost", "Post", FormMethod.Post))
+@using (Html.BeginForm("Create", "Post", FormMethod.Post))
 {
     <div class="form-group">
-        <label>Title</label>
-        @Html.TextBox("Title", "",new { @class = "form-control"})
+        @Html.LabelFor(model => model.Title)
+        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Title, null, new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        <label>Image URL</label>
-        @Html.TextBox("Image", "",new { @class = "form-control"})
+        @Html.LabelFor(model => model.Image)
+        @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Image, null, new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        <label>Description</label>
-        @Html.TextArea("Discription", "", 5, 50, new { @class = "form-control" })
+        @Html.LabelFor(model => model.Discription)
+        @Html.EditorFor(model => model.Discription, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Discription, null, new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        <label>Content</label>
-        @Html.TextArea("Body", "", 5, 50, new { @class = "form-control" })
+        @Html.LabelFor(model => model.Body)
+        @Html.EditorFor(model => model.Body, new { htmlAttributes = new { @class = "form-control" }})
+        @Html.ValidationMessageFor(model => model.Body, null, new { @class = "text-danger" })
     </div>
     <div class="form-group">
         @Html.CheckBox("IsShowComment", true, new {@class = "form-check-input", id = "check1"})
         <label class="form-check-label" for="check1">Show comments</label>
     </div>
-    <button type="submit" class="btn btn-primary">Send</button>
+    <button type="submit" class="btn btn-primary">Create</button>
 }

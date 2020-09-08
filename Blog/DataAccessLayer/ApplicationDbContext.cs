@@ -15,6 +15,7 @@ namespace DataAccessLayer
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Comment> Comments { get; set; }
+        public DbSet<UserPost> UserPosts { get; set; }
 
         public static ApplicationDbContext Create()
         {

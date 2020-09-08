@@ -1,0 +1,34 @@
+﻿@model System.Collections.Generic.List<DataAccessLayer.ApplicationUser>
+
+@{
+    ViewBag.Title = "All Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    All Users
+</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">Full Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">Is Blocked</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model)
+    {
+        <tr>
+            <th scope="row">@user.FullName</th>
+            <td>@user.Email</td>
+            <td>@user.IsUserBlocked</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "User", routeValues: new {id = user.Id}, htmlAttributes: new {@class = "btn btn-success"})
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

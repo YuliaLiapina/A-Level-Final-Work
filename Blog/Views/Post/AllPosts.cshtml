@@ -1,0 +1,78 @@
+﻿@model Blog.Models.AllPostsViewModel
+
+@{
+    ViewBag.Title = "All Articles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    All Articles
+
+    <span class="align-right">
+        @if (Model.Page > 0)
+        {
+            <a href="@Url.Action("AllPosts", new {page = Model.Page - 1})"
+               class="btn btn-default">
+                &laquo; Prev
+            </a>
+        }
+        @if (Model.Page < Model.MaxPage)
+        {
+            <a href="@Url.Action("AllPosts", new {page = Model.Page + 1})"
+               class="btn btn-default">
+                Next &raquo;
+            </a>
+        }
+    </span>
+</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Publish Date</th>
+        <th scope="col">Allowed to comment</th>
+        <th scope="col">Is blocked</th>
+        <th scope="col">Image</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach (var article in Model.Posts)
+        {
+            <tr>
+                <th scope="row">@article.Id</th>
+                <td>
+                    @Html.ActionLink(article.Title, "Details", "Post", routeValues: new {id = article.Id}, htmlAttributes: null)
+                </td>
+                <td>@article.PublishDate.ToShortDateString()</td>
+                <td>
+                    @if (article.IsShowComment)
+                    {
+                        <span class="allowed">allowed</span>
+                    }
+                    else
+                    {
+                        <span class="not-allowed">not-allowed</span>
+                    }
+                </td>
+                <td>
+                    @if (article.IsBlocked)
+                    {
+                        <span class="blocked">Blocked</span>
+                    }
+                </td>
+                <td>
+                    <img src="@article.Image" alt="#">
+                </td>
+                <td>
+                    <div class="actions">
+                        @Html.ActionLink("Edit", "Edit", "Post", new {id = article.Id, ReturnUrl = Url.Action("AllPosts")}, new {@class = "btn btn-success"})
+                        @Html.ActionLink("Delete", "Delete", "Post", new {id = article.Id}, new {@class = "btn btn-danger"})
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

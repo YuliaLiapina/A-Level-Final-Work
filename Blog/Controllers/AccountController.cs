@@ -152,7 +152,15 @@ namespace Blog.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName = model.FullName};
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    FullName = model.FullName,
+                    PostsReadCount = 0,
+                    CommentsWriteCount = 0,
+                    PostsWriteCount = 0
+                };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -164,7 +172,7 @@ namespace Blog.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Post");
                 }
                 AddErrors(result);
             }
@@ -393,7 +401,7 @@ namespace Blog.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Post");
         }
 
         //
@@ -450,7 +458,7 @@ namespace Blog.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Post");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult

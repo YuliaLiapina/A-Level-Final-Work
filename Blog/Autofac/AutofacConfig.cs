@@ -19,10 +19,14 @@ namespace Blog.Autofac
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterType<ApplicationDbContext>().InstancePerRequest();
+
             builder.RegisterType<PostManager>().As<IPostManager>();
             builder.RegisterType<CommentManager>().As<ICommentManager>();
+            builder.RegisterType<UserPostManager>().As<IUserPostManager>();
+
             builder.RegisterType<PostRepo>().As<IRepository<Post, int>>();
             builder.RegisterType<CommentRepo>().As<IRepository<Comment, int>>();
+            builder.RegisterType<UserPostRepo>().As<IRepository<UserPost, int>>();
 
             builder.RegisterModule<AutofacModule>();
 

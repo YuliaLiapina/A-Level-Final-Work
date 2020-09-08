@@ -1,34 +1,74 @@
-﻿@model Blog.Models.PostViewModel
+﻿@model Blog.Models.PostDetailsViewModel
 
 @{
-    ViewBag.Title = "Article Details - " + @Model.Title;
+    ViewBag.Title = "Article Details - " + @Model.Post.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="post">
-    <img src="@Model.Image" alt="#">
-    <h2>@Model.Title</h2>
-    <span class="author">@Model.Author.UserName (Publish date: <em>@Model.PublishDate.ToShortDateString()</em>)</span>
+    <img src="@Model.Post.Image" alt="#">
+    <h2>@Model.Post.Title</h2>
+    <span class="author">
+        @Html.ActionLink(Model.Post.Author.FullName, "Index", "Post", routeValues: new {authorId = Model.Post.Author.Id}, htmlAttributes: null)
+        (Publish date: <em>@Model.Post.PublishDate.ToShortDateString()</em>)
+        @Model.Post.UsersReadCount views
+    </span>
     <div class="content">
-        @Html.Raw(Model.Body)
+        @Html.Raw(Model.Post.Body)
     </div>
 </div>
-<ul class="comments">
-    @foreach (var comment in Model.Comments)
-    {
-        <li>
-            <strong>@comment.Author.FullName</strong> <em>@comment.PublishDate.ToShortDateString()</em>
-            <p>@comment.Body</p>
-        </li>
-    }
-</ul>
-<h5>Add comment</h5>
-@using (Html.BeginForm("AddComment", "Comment", FormMethod.Post))
+
+@if (Model.Post.IsShowComment)
 {
-    @Html.Hidden("PostId", Model.Id, null)
-    <div class="form-group">
-        <label>Comment</label>
-        @Html.TextArea("Body", "", 5, 50, new { @class = "form-control" })
+    <div class="comments-box">
+        <h3>Conversation <span>@Model.Post.Comments.Count() Comments</span></h3>
+        <hr />
+        @if (Request.IsAuthenticated && User.IsInRole("user"))
+        {
+            if (Model.IsUserBlocked)
+            {
+                <div class="alert alert-danger" role="alert">
+                    You cannot leave comments as your account is blocked!
+                </div>
+            }
+            else
+            {
+                using (Html.BeginForm("AddComment", "Comment", FormMethod.Post))
+                {
+                    <h4>Add Comment:</h4>
+                    @Html.Hidden("PostId", Model.Post.Id, null)
+                    <div class="form-group">
+                        @Html.TextArea("Body", "", 5, 50, new { @class = "form-control", required = true, minLenght = 10 })
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                }
+            }
+        }
+        else
+        {
+            <div class="alert alert-warning" role="alert">
+                In order to leave a comment you need to
+                @Html.ActionLink("register", "Register", "Account", routeValues: new { ReturnUrl = Request.Url.LocalPath }, htmlAttributes: new { id = "registerLink2" })
+                or
+                @Html.ActionLink("log in", "Login", "Account", routeValues: new { ReturnUrl = Request.Url.LocalPath }, htmlAttributes: new { id = "loginLink2" })
+                .
+            </div>
+        }
+        <ul class="comments">
+            @foreach (var comment in Model.Post.Comments.Reverse())
+            {
+                <li>
+                    <strong>@comment.Author.FullName</strong>
+                    <em>@comment.PublishDate.ToShortDateString()</em>
+                    <p>@comment.Body</p>
+                </li>
+            }
+        </ul>
     </div>
-    <button type="submit" class="btn btn-primary">Send</button>
+}
+else
+{
+    <div class="alert alert-warning" role="alert">
+        Comments on this post are closed!
+    </div>
 }

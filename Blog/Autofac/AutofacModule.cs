@@ -14,8 +14,18 @@ namespace Blog.Autofac
             {
                 cfg.CreateMap<PostModel,Post>().ReverseMap();
                 cfg.CreateMap<PostViewModel,PostModel>().ReverseMap();
+
                 cfg.CreateMap<CommentModel,Comment>().ReverseMap();
                 cfg.CreateMap<CommentViewModel,CommentModel>().ReverseMap();
+
+                cfg.CreateMap<UserPostModel,UserPost>().ReverseMap();
+
+                cfg.CreateMap<PostViewModel,EditPostViewModel>().ReverseMap();
+                cfg.CreateMap<PostModel,EditPostViewModel>().ReverseMap();
+
+                cfg.CreateMap<PostViewModel,CreatePostViewModel>().ReverseMap();
+                cfg.CreateMap<PostModel,CreatePostViewModel>().ReverseMap();
+
             })).AsSelf().SingleInstance();
 
             builder.Register(c =>

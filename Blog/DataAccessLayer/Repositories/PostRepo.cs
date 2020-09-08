@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccessLayer.Models;
 using System.Data.Entity;
-using DataAccessLayer.Interfaces;
+using System.Linq.Expressions;
 
 namespace DataAccessLayer.Repositories
 {
@@ -15,7 +16,7 @@ namespace DataAccessLayer.Repositories
         public override Post Get(int id)
         {
             return _dbSet
-                .Include(article => article.Comments)
+                .Include(article => article.Comments.Select(x => x.Author))
                 .Include(article => article.Author)
                 .FirstOrDefault(x => x.Id == id);
         }
@@ -24,6 +25,14 @@ namespace DataAccessLayer.Repositories
         {
             return _dbSet
                 .Include(article => article.Author)
+                .ToList();
+        }
+
+        public override IEnumerable<Post> Get(Expression<Func<Post, bool>> expression)
+        {
+            return _dbSet
+                .Include(article => article.Author)
+                .Where(expression)
                 .ToList();
         }
     }

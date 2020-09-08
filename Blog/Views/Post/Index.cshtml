@@ -11,24 +11,60 @@
 </div>
 
 <h2>
-    All Posts
-    @* @Html.ActionLink("Add New Article", "Create", "Article", null, new { @class = "btn btn-danger align-right" }) *@
+    All Articles
+
+    <span class="align-right">
+        @if (Model.Page > 0)
+        {
+            <a href="@Url.Action("Index", new {page = Model.Page - 1, authorId = Model.AuthorId})"
+               class="btn btn-default">
+                &laquo; Prev
+            </a>
+        }
+        @if (Model.Page < Model.MaxPage)
+        {
+            <a href="@Url.Action("Index", new {page = Model.Page + 1, authorId = Model.AuthorId})"
+               class="btn btn-default">
+                Next &raquo;
+            </a>
+        }
+    </span>
 </h2>
 
 <div class="main">
     <div class="row">
-    @foreach (var article in Model.Posts)
-    {
-        <a href="/Post/Details/@article.Id" class="card col-sm-6 col-md-4">
-            <div class="thumbnail">
-                <div class="caption">
-                    <h3>@article.Title</h3>
-                    <h5>@article.Author.FullName (<em>@article.PublishDate.ToShortDateString()</em>)</h5>
-                    <img src="@article.Image" alt="#">
-                    <p>@article.Discription</p>
+        @foreach (var article in Model.Posts)
+        {
+            <div href="@Url.Action("Details", new { id = article.Id })" class="card col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h3>
+                            @Html.ActionLink(article.Title, "Details", "Post", routeValues: new {id = article.Id}, htmlAttributes: null)
+                        </h3>
+                        <h5>
+                            @Html.ActionLink(article.Author.FullName, "Index", "Post", routeValues: new {page = Model.Page, authorId = article.Author.Id}, htmlAttributes: null)
+                            (Publish date: <em>@article.PublishDate.ToShortDateString()</em>)
+                        </h5>
+                        <span class="author">@article.UsersReadCount views</span>
+                        <img src="@article.Image" alt="#">
+                        <p>@article.Discription</p>
+                    </div>
                 </div>
             </div>
-        </a>
-    }
+        }
+    </div>
+    <div class="aside">
+        <h4>Authors:</h4>
+        <ul>
+            <li>
+                @Html.ActionLink("All authors", "Index", "Post", routeValues: null, htmlAttributes: null)
+            </li>
+            @foreach (var author in Model.Authors)
+            {
+                <li>
+                    @Html.ActionLink(author.FullName, "Index", "Post", routeValues: new {authorId = author.Id}, htmlAttributes: null)
+                </li>
+            }
+        </ul>
     </div>
 </div>

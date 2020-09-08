@@ -23,7 +23,7 @@ namespace DataAccessLayer.Repositories
             return _dbSet.FirstOrDefault(x => x.Id.ToString().Equals(id.ToString()));
         }
 
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> expression)
+        public virtual IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> expression)
         {
             return _dbSet.Where(expression).ToList();
         }
@@ -35,7 +35,7 @@ namespace DataAccessLayer.Repositories
 
         public void DeleteById(TKey id, bool isSaveChangeRequired = true)
         {
-            var entityToDelete = _dbSet.FirstOrDefault(x => x.Id.Equals(id));
+            var entityToDelete = _dbSet.FirstOrDefault(x => x.Id.ToString().Equals(id.ToString()));
             if (entityToDelete == null) return;
             _dbSet.Remove(entityToDelete);
             if (isSaveChangeRequired) _ctx.SaveChanges();

@@ -18,6 +18,7 @@ namespace BusinessLayer.Models
         public string Discription { get; set; }
         public bool IsBlocked { get; set; }
         public bool IsShowComment { get; set; }
+        public int UsersReadCount { get; set; }
 
         public string AuthorId { get; set; }
         public ApplicationUser Author { get; set; }
