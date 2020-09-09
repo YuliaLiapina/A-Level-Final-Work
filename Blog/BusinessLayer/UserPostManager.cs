@@ -4,7 +4,6 @@ using System.Linq.Expressions;
 using AutoMapper;
 using BusinessLayer.Interfaces;
 using BusinessLayer.Models;
-using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
 
@@ -36,15 +35,15 @@ namespace BusinessLayer
             _userPostRepo.Add(_mapper.Map<UserPost>(userPost), true);
         }
 
-        public bool IsViewPost(PostModel post, ApplicationUser user)
+        public bool IsViewPost(PostModel post, string userId)
         {
-            var entities = GetAll(x => x.PostId == post.Id && x.UserId == user.Id);
+            var entities = GetAll(x => x.PostId == post.Id && x.UserId == userId);
             if (entities.Count == 0)
             {
                 Add(new UserPostModel
                 {
                     PostId = post.Id,
-                    UserId = user.Id
+                    UserId = userId
                 });
                 post.UsersReadCount++;
                 _postManager.Update(post);

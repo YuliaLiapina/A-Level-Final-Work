@@ -9,5 +9,6 @@ namespace DataAccessLayer.Interfaces
         DbSet<Post> Posts { get; set; }
         DbSet<Comment> Comments { get; set; }
         DbSet<UserPost> UserPosts { get; set; }
+        DbSet<Awards> Awards { get; set; }
     }
 }

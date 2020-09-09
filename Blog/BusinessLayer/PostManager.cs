@@ -23,7 +23,7 @@ namespace BusinessLayer
             _mapper = mapper;
         }
 
-        public IList<PostModel> GetAll()
+        public IList<PostModel> Get()
         {
             var entities = _postRepo.Get();
             var entityModels = _mapper.Map<IList<PostModel>>(entities);
@@ -31,7 +31,7 @@ namespace BusinessLayer
             return entityModels;
         }
 
-        public IList<PostModel> GetAll(Expression<Func<Post, bool>> expression)
+        public IList<PostModel> Get(Expression<Func<Post, bool>> expression)
         {
             var entities = _postRepo.Get(expression);
             var entityModels = _mapper.Map<IList<PostModel>>(entities);
@@ -39,15 +39,7 @@ namespace BusinessLayer
             return entityModels;
         }
 
-        public IList<PostModel> GetByAuthorId(string authorId)
-        {
-            var entities = _postRepo.Get(post => post.AuthorId == authorId);
-            var entityModels = _mapper.Map<IList<PostModel>>(entities);
-
-            return entityModels;
-        }
-
-        public PostModel GetById(int id)
+        public PostModel Get(int id)
         {
             var entity = _postRepo.Get(id);
             var entityModel = _mapper.Map<PostModel>(entity);
@@ -62,7 +54,7 @@ namespace BusinessLayer
 
         public void RemoveById(int postId)
         {
-            var _post = GetById(postId);
+            var _post = Get(postId);
             foreach (var comment in _post.Comments)
             {
                 _commentRepo.DeleteById(comment.Id, false);

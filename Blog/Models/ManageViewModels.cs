@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using DataAccessLayer;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
@@ -13,7 +12,6 @@ namespace Blog.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
-        public ApplicationUser User { get; set; }
     }
 
     public class ManageLoginsViewModel

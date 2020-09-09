@@ -31,6 +31,7 @@ namespace DataAccessLayer.Repositories
         public override IEnumerable<Post> Get(Expression<Func<Post, bool>> expression)
         {
             return _dbSet
+                .Include(article => article.Comments)
                 .Include(article => article.Author)
                 .Where(expression)
                 .ToList();

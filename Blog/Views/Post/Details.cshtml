@@ -1,8 +1,18 @@
 ﻿@model Blog.Models.PostDetailsViewModel
 
 @{
-    ViewBag.Title = "Article Details - " + @Model.Post.Title;
+    ViewBag.Title = "Article Details - " + Model.Post.Title;
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.UserPostsReadCount >= 10 && Model.UserCommentsWriteCount >= 10 && User.IsInRole("user"))
+{
+    <br>
+    <div class="alert alert-warning" role="alert">
+        Congratulations! Your account has been upgraded to author status. For the final transition, you need to
+        <a href="javascript:document.getElementById('logoutForm').submit()">log out</a>
+        and log in again.
+    </div>
 }
 
 <div class="post">

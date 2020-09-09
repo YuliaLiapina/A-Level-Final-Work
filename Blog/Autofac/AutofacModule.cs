@@ -2,6 +2,7 @@
 using AutoMapper;
 using Blog.Models;
 using BusinessLayer.Models;
+using DataAccessLayer;
 using DataAccessLayer.Models;
 
 namespace Blog.Autofac
@@ -22,6 +23,14 @@ namespace Blog.Autofac
 
                 cfg.CreateMap<PostViewModel,EditPostViewModel>().ReverseMap();
                 cfg.CreateMap<PostModel,EditPostViewModel>().ReverseMap();
+
+                cfg.CreateMap<Awards,AwardsModel>().ReverseMap();
+                cfg.CreateMap<AwardsModel,AwardsViewModel>().ReverseMap();
+                cfg.CreateMap<AwardsModel,AwardEditViewModel>().ReverseMap();
+                cfg.CreateMap<AwardsModel,CreateAwardViewModel>().ReverseMap();
+
+                cfg.CreateMap<ApplicationUser,ApplicationUserModel>().ReverseMap();
+                cfg.CreateMap<ApplicationUserModel,ApplicationUserViewModel>().ReverseMap();
 
                 cfg.CreateMap<PostViewModel,CreatePostViewModel>().ReverseMap();
                 cfg.CreateMap<PostModel,CreatePostViewModel>().ReverseMap();

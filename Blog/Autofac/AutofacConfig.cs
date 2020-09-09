@@ -3,6 +3,7 @@ using Autofac;
 using Autofac.Integration.Mvc;
 using BusinessLayer;
 using BusinessLayer.Interfaces;
+using BusinessLayer.Models;
 using DataAccessLayer;
 using DataAccessLayer.Interfaces;
 using DataAccessLayer.Models;
@@ -22,11 +23,15 @@ namespace Blog.Autofac
 
             builder.RegisterType<PostManager>().As<IPostManager>();
             builder.RegisterType<CommentManager>().As<ICommentManager>();
+            builder.RegisterType<AwardManager>().As<IAwardManager>();
             builder.RegisterType<UserPostManager>().As<IUserPostManager>();
+            builder.RegisterType<UserService>().As<IUserService>();
 
             builder.RegisterType<PostRepo>().As<IRepository<Post, int>>();
             builder.RegisterType<CommentRepo>().As<IRepository<Comment, int>>();
             builder.RegisterType<UserPostRepo>().As<IRepository<UserPost, int>>();
+            builder.RegisterType<AwardsRepo>().As<IRepository<Awards, int>>();
+            builder.RegisterType<UserRepo>().As<IUserRepo>();
 
             builder.RegisterModule<AutofacModule>();
 

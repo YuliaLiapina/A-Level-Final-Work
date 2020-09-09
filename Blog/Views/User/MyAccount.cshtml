@@ -1,0 +1,95 @@
+﻿@model Blog.Models.MyAccountViewModel
+
+@{
+    ViewBag.Title = "Manage My Account";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model.User.IsUserBlocked)
+{
+    <br>
+    <div class="alert alert-danger" role="alert">
+        Your account has been blocked!
+        @if (User.IsInRole("author"))
+        {
+            <span>You cannot add / edit / delete articles!</span>
+        }
+        You cannot add comments!
+    </div>
+}
+
+@if (Model.User.PostsReadCount >= 10 && Model.User.CommentsWriteCount >= 10 && User.IsInRole("user"))
+{
+    <br>
+    <div class="alert alert-warning" role="alert">
+        Congratulations! Your account has been upgraded to author status. For the final transition, you need to
+        <a href="javascript:document.getElementById('logoutForm').submit()">log out</a>
+        and log in again.
+    </div>
+}
+
+<h2>Manage My Account</h2>
+
+<div>
+    <h4>Change your account settings</h4>
+    <hr />
+    <dl class="dl-horizontal">
+
+        <dt>Awards:</dt>
+        <dd>
+            <ul class="awards">
+                @foreach (var award in Model.User.Awards)
+                {
+                    <li>@award.Name</li>
+                }
+            </ul>
+        </dd>
+        <dt>Writed comments:</dt>
+        <dd>@Model.User.CommentsWriteCount</dd>
+        <dt>Readed articles:</dt>
+        <dd>@Model.User.PostsReadCount</dd>
+        <dt>Writed articles:</dt>
+        <dd>
+            @if (!User.IsInRole("author"))
+            {
+                <div class="alert alert-warning" role="alert">
+                    In order to become an author, you need to read 10 articles and write 10 comments!
+                </div>
+            }
+            else
+            {
+                @Model.User.PostsWriteCount
+            }
+        </dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Status:</dt>
+        <dd>
+            @if (User.IsInRole("admin"))
+            {
+                <span>Administrator</span>
+            }
+            else if (User.IsInRole("author"))
+            {
+                <span>Author</span>
+            }
+            else if (User.IsInRole("user"))
+            {
+                <span>User</span>
+            }
+        </dd>
+        <dt>Is Blocked:</dt>
+        <dd>@Model.User.IsUserBlocked</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>Full Name:</dt>
+        <dd>@Model.User.FullName</dd>
+        <dt>Email:</dt>
+        <dd>@Model.User.Email</dd>
+        <dt></dt>
+        <dd>
+            [@Html.ActionLink("Edit", "EditMyAccount", "User")]
+        </dd>
+    </dl>
+</div>

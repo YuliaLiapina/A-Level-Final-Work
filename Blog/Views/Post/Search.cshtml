@@ -1,0 +1,34 @@
+﻿@model Blog.Models.SearchViewModel
+
+@{
+    ViewBag.Title = "Search by article title";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Searching by "@Model.SearchString":</h2>
+
+@if (Model.Posts.Count == 0)
+{
+    <br>
+    <div class="alert alert-warning" role="alert">
+        Nothing found!
+    </div>
+}
+else
+{
+    <span class="author">Found @Model.Posts.Count() results</span>
+    foreach (var article in Model.Posts)
+    {
+        <div class="search-result">
+            <img src="@article.Image" alt="#">
+            <h3>
+                @Html.ActionLink(article.Title, "Details", "Post", routeValues: new {id = article.Id}, htmlAttributes: null)
+            </h3>
+            <h5>
+                @Html.ActionLink(article.Author.FullName, "Index", "Post", routeValues: new {authorId = article.Author.Id}, htmlAttributes: null)
+                (Publish date: <em>@article.PublishDate.ToShortDateString()</em>)
+            </h5>
+            <span class="author">@article.UsersReadCount views (@article.Comments.Count() comments)</span>
+        </div>
+    }
+}

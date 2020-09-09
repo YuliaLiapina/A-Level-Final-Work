@@ -60,6 +60,7 @@
     <Compile Include="Interfaces\IEntity.cs" />
     <Compile Include="Interfaces\IIdentityServerContext.cs" />
     <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Interfaces\IUserRepo.cs" />
     <Compile Include="Migrations\202008311103182_Initial_Create.cs" />
     <Compile Include="Migrations\202008311103182_Initial_Create.Designer.cs">
       <DependentUpon>202008311103182_Initial_Create.cs</DependentUpon>
@@ -92,16 +93,23 @@
     <Compile Include="Migrations\202009081151477_Add_Post_Comment_Read_Write_count.Designer.cs">
       <DependentUpon>202009081151477_Add_Post_Comment_Read_Write_count.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202009082323026_Add_Awards.cs" />
+    <Compile Include="Migrations\202009082323026_Add_Awards.Designer.cs">
+      <DependentUpon>202009082323026_Add_Awards.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Awards.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Post.cs" />
     <Compile Include="Models\UserPost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AwardsRepo.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Repositories\CommentRepo.cs" />
     <Compile Include="Repositories\PostRepo.cs" />
     <Compile Include="Repositories\UserPostRepo.cs" />
+    <Compile Include="Repositories\UserRepo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -131,6 +139,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202009081151477_Add_Post_Comment_Read_Write_count.resx">
       <DependentUpon>202009081151477_Add_Post_Comment_Read_Write_count.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202009082323026_Add_Awards.resx">
+      <DependentUpon>202009082323026_Add_Awards.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

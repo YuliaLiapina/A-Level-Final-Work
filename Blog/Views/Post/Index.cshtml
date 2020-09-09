@@ -45,7 +45,7 @@
                             @Html.ActionLink(article.Author.FullName, "Index", "Post", routeValues: new {page = Model.Page, authorId = article.Author.Id}, htmlAttributes: null)
                             (Publish date: <em>@article.PublishDate.ToShortDateString()</em>)
                         </h5>
-                        <span class="author">@article.UsersReadCount views</span>
+                        <span class="author">@article.UsersReadCount views (@article.Comments.Count() comments)</span>
                         <img src="@article.Image" alt="#">
                         <p>@article.Discription</p>
                     </div>
@@ -63,6 +63,17 @@
             {
                 <li>
                     @Html.ActionLink(author.FullName, "Index", "Post", routeValues: new {authorId = author.Id}, htmlAttributes: null)
+                </li>
+            }
+        </ul>
+        <h4>Most Viewed:</h4>
+        <ul class="most-viewed">
+            @foreach (var article in Model.MostViewed)
+            {
+                <li>
+                    <img src="@article.Image" alt="#">
+                    @Html.ActionLink(article.Title, "Details", "Post", routeValues: new {id = article.Id}, htmlAttributes: null)
+                    <span class="author">@article.UsersReadCount views (@article.Comments.Count() comments)</span>
                 </li>
             }
         </ul>

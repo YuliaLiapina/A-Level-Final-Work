@@ -1,0 +1,45 @@
+﻿@model System.Collections.Generic.List<Blog.Models.AwardsViewModel>
+
+@{
+    ViewBag.Title = "Awards";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Awards
+
+    <span class="align-right">
+        <a href="@Url.Action("Create")"
+           class="btn btn-success">
+            Create New Award
+        </a>
+    </span>
+</h2>
+
+<table class="table table-striped">
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Posts Read Count</th>
+        <th scope="col">Posts Write Count</th>
+        <th scope="col">Comment Write Count</th>
+        <th scope="col">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var award in Model)
+    {
+        <tr>
+            <th scope="row">@award.Id</th>
+            <td>@award.Name</td>
+            <td>@award.PostReadCount</td>
+            <td>@award.PostWriteCount</td>
+            <td>@award.CommentWriteCount</td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "Award", new {id = award.Id}, new {@class = "btn btn-success"})
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

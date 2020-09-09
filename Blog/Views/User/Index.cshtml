@@ -1,4 +1,4 @@
-﻿@model System.Collections.Generic.List<DataAccessLayer.ApplicationUser>
+﻿@model System.Collections.Generic.List<Blog.Models.ApplicationUserViewModel>
 
 @{
     ViewBag.Title = "All Users";
@@ -15,6 +15,7 @@
         <th scope="col">Full Name</th>
         <th scope="col">Email</th>
         <th scope="col">Is Blocked</th>
+        <th scope="col">Awards</th>
         <th scope="col">Actions</th>
     </tr>
     </thead>
@@ -25,6 +26,14 @@
             <th scope="row">@user.FullName</th>
             <td>@user.Email</td>
             <td>@user.IsUserBlocked</td>
+            <td>
+                <ul class="awards">
+                    @foreach (var award in user.Awards)
+                    {
+                        <li>@award.Name</li>
+                    }
+                </ul>
+            </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", "User", routeValues: new {id = user.Id}, htmlAttributes: new {@class = "btn btn-success"})
             </td>
