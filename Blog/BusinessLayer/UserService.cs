@@ -80,7 +80,7 @@ namespace BusinessLayer.Models
         public void CheckUserStatus(UserManager<ApplicationUser> userManager, string userId)
         {
             var user = userManager.FindById(userId);
-            if (userManager.IsInRole(user.Id, "author") && user.CommentsWriteCount >= MAX_COMMENTS_WRITE && user.PostsReadCount >= MAX_POST_READ)
+            if (!userManager.IsInRole(user.Id, "author") && user.CommentsWriteCount >= MAX_COMMENTS_WRITE && user.PostsReadCount >= MAX_POST_READ)
             {
                 userManager.AddToRole(user.Id, "author");
                 userManager.Update(user);

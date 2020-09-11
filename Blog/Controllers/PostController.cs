@@ -167,7 +167,7 @@ namespace Blog.Controllers
                 _postManager.Add(_newPost);
                 _userService.UserAddPost(User.Identity.GetUserId());
 
-                return RedirectToAction("Index");
+                return RedirectToAction("MyPosts");
             }
 
             return View(_post);

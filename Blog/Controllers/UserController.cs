@@ -60,9 +60,9 @@ namespace Blog.Controllers
 
         [HttpGet]
         [Authorize(Roles="admin")]
-        public ActionResult Edit(string userId)
+        public ActionResult Edit(string id)
         {
-            var user = _userService.Get(userId);
+            var user = _userService.Get(id);
 
             var result = new EditApplicationUser
             {

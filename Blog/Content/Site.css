@@ -1,6 +1,9 @@
-﻿body {
+﻿html, body {
+    height: 100%;
+}
+
+body{
     padding-top: 50px;
-    padding-bottom: 20px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -111,6 +114,18 @@ h2 {
     vertical-align: top;
     float: none;
     padding-left: 15px;
+    position: relative;
+}
+.main .card:before{
+    clear: both;
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(100% - 30px);
+    height: 1px;
+    top: -23px;
+    left: 15px;
+    background: #eee;
 }
 .table img{
     max-width: 150px;
@@ -220,7 +235,8 @@ h2 {
 .search-bar{
     padding: 12px 0 0;
 }
-.search-bar input[type="text"]{
+.search-bar input[type="text"],
+.search-bar input:focus[type="text"]{
     background: #222;
     border: 1px solid #ccc;
     border-radius: 3px 0 0 3px;
@@ -228,6 +244,7 @@ h2 {
     font-size: 13px;
     line-height: 22px;
     float: left;
+    outline: none;
 }
 .search-bar .submit{
     padding-top: 2px;
@@ -249,4 +266,20 @@ h2 {
     max-width: 200px;
     float: left;
     margin: 0 20px 30px 0;
+}
+footer{
+    padding: 19px 0 0;
+    background: #efefef;
+    overflow: hidden;
+    height: 57px;
+    margin-top: -57px;
+}
+footer p{
+    margin: 0;
+}
+.body-content{
+    min-height: 100%;
+}
+.body-content .wrapper{
+    padding: 0 0 70px;
 }

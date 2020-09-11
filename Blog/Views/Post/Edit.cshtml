@@ -32,7 +32,7 @@
         @Html.ValidationMessageFor(model => model.Body, null, new {@class = "text-danger"})
     </div>
     <div class="form-group">
-        @Html.EditorFor(model => model.IsShowComment, new { htmlAttributes = new { @class = "form-check-input", id = "check1" }})
+        @Html.EditorFor(model => model.IsShowComment, new { htmlAttributes = new { @class = "form-check-input" }})
         @Html.LabelFor(model => model.IsShowComment, new {@class = "form-check-input"})
     </div>
     if(User.IsInRole("admin"))
